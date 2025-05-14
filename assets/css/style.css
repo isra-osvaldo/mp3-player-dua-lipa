@@ -51,7 +51,7 @@ body > * {
     color: var(--white);
     /* outline: 2px solid ; */
     width: 450px;
-    height: 250px;
+    height: 230px;
     padding: 10px 30px;
     border-radius: 20px;
     background-color: rgba(228, 228, 228, .1);
