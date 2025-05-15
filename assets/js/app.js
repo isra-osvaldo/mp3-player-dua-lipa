@@ -40,7 +40,7 @@ function actualizarInfoCancion() {
     $tituloCancion.textContent = canciones[indiceCancionActual].titulo
     $nombreArtista.textContent = canciones[indiceCancionActual].nombre
     $cancion.src = canciones[indiceCancionActual].fuente
-    $cancion.addEventListener('loadeddata', function(){})
+    $cancion.addEventListener('loadeddata', () => {})
 }
 
 $botonReproducirPausar.addEventListener('click', reproducirPausar)
@@ -48,23 +48,36 @@ $botonReproducirPausar.addEventListener('click', reproducirPausar)
 function reproducirPausar() {
     if ($cancion.paused) {
         reproducirCancion()
-        $iconoControl.classList.add("bi-pause-fill")
-        $iconoControl.classList.remove("bi-play-fill")
     } else {
         pausarCancion()
-        $iconoControl.classList.remove("bi-pause-fill")
-        $iconoControl.classList.add("bi-play-fill")
     }
 }
 
 function reproducirCancion() {
     $cancion.play()
+    $iconoControl.classList.add("bi-pause-fill")
+    $iconoControl.classList.remove("bi-play-fill")
 }
 
 function pausarCancion() {
     $cancion.pause()
+    $iconoControl.classList.remove("bi-pause-fill")
+    $iconoControl.classList.add("bi-play-fill")
 }
 
+$cancion.addEventListener('timeupdate', () => {
+    if (!$cancion.paused) {
+        $progreso.value = $cancion.currentTime
+    }
+})
+
+$progreso.addEventListener('input', () => {
+    $cancion.currentTime = $progreso.value
+})
+
+$progreso.addEventListener('change', () => {
+    reproducirCancion()
+})
 
 actualizarInfoCancion();
 
