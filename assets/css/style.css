@@ -123,3 +123,8 @@ body > * {
     transform: scale(1.3);
 }
 
+@media (max-width: 576px) {
+    .reproductor-musica {
+        width: 90%;
+    }
+}
